@@ -45,6 +45,7 @@ dependencies {
     val fuelVersion = "2.3.1"
     implementation("com.github.kittinunf.fuel:fuel:$fuelVersion")
     implementation("com.github.kittinunf.fuel:fuel-jackson:$fuelVersion")
+    implementation("com.github.kittinunf.fuel:fuel-coroutines:$fuelVersion")
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springVersion")
     testImplementation("io.projectreactor:reactor-test:3.4.10")
