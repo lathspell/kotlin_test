@@ -46,6 +46,11 @@ dependencies {
     implementation("com.github.kittinunf.fuel:fuel:$fuelVersion")
     implementation("com.github.kittinunf.fuel:fuel-jackson:$fuelVersion")
     implementation("com.github.kittinunf.fuel:fuel-coroutines:$fuelVersion")
+    // http4k
+    implementation("org.http4k:http4k-core:4.13.0.0")
+    implementation("org.http4k:http4k-client-apache4:4.13.0.0")
+    implementation("org.http4k:http4k-format-jackson:4.13.0.0")
+
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springVersion")
     testImplementation("io.projectreactor:reactor-test:3.4.10")

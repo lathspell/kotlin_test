@@ -1,5 +1,10 @@
 = Webclients Comparison
 
+== Fuel Client
+
+* + Perfect :-)
+
+
 == Webflux Client
 
 * strange...
@@ -18,6 +23,6 @@ The Ktor client is a facade for different backends like Apache, OkHttp and JDK.
 
 * - No JSON integration, ObjectMapper has to be used
 
-== Fuel Client
+== Http4k
 
-* + Perfect :-)
+Maybe good as a standalone server but as a client, very awkward.
