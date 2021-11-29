@@ -21,6 +21,12 @@ class HelloWorldController {
     @GetMapping("/hello-world/json")
     fun helloWorldAsJson() = Greeting("Hello", "World")
 
+    @GetMapping("/hello-world/json-list")
+    fun helloWorldAsJsonList() = listOf(Greeting("Hello", "World"), Greeting("Hallo", "Welt"))
+
+    @GetMapping("/hello-world/empty-list")
+    fun helloWorldAsEmptyList() = emptyList<Greeting>()
+
     @GetMapping("/slow", produces = [TEXT_PLAIN_VALUE])
     fun slow(@RequestParam("i") i: Int): String {
         log.info("Handling /slow $i")
