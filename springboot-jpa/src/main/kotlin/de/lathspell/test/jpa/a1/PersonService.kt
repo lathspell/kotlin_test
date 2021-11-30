@@ -1,14 +1,8 @@
-package de.lathspell.test.service
+package de.lathspell.test.jpa.a1
 
-import de.lathspell.test.jpa.GroupRepo
-import de.lathspell.test.jpa.PersonRepo
-import de.lathspell.test.model.Group
-import de.lathspell.test.model.Person
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Isolation
 import org.springframework.transaction.annotation.Isolation.SERIALIZABLE
-import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Propagation.REQUIRED
 import org.springframework.transaction.annotation.Transactional
 

@@ -1,9 +1,5 @@
-package de.lathspell.test
+package de.lathspell.test.jpa.a1
 
-import de.lathspell.test.jpa.GroupRepo
-import de.lathspell.test.jpa.PersonRepo
-import de.lathspell.test.model.Person
-import de.lathspell.test.service.PersonService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.slf4j.LoggerFactory
@@ -33,27 +29,27 @@ class TxTest(
 }
 /*
 2021-02-09 23:58:53.352  INFO 15432 --- [    Test worker] de.lathspell.test.TxTest                 : ===== before =====
-2021-02-09 23:58:53.352 DEBUG 15432 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [de.lathspell.test.service.PersonService.addPersonAndGroup]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2021-02-09 23:58:53.352 DEBUG 15432 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [de.lathspell.test.jpa.a1.PersonService.addPersonAndGroup]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
 2021-02-09 23:58:53.352 DEBUG 15432 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(760474367<open>)] for JPA transaction
 2021-02-09 23:58:53.352 DEBUG 15432 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@3ef86707]
 
-2021-02-09 23:58:53.367  INFO 15432 --- [    Test worker] de.lathspell.test.service.PersonService  : # saving person Person(id=c0874068-1fe4-4fdd-95d3-bb5b232e034a, gid=3, name=Tim)
+2021-02-09 23:58:53.367  INFO 15432 --- [    Test worker] de.lathspell.test.jpa.a1.PersonService  : # saving person Person(id=c0874068-1fe4-4fdd-95d3-bb5b232e034a, gid=3, name=Tim)
 2021-02-09 23:58:53.383 DEBUG 15432 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(760474367<open>)] for JPA transaction
 2021-02-09 23:58:53.383 DEBUG 15432 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
 2021-02-09 23:58:53.414 DEBUG 15432 --- [    Test worker] org.hibernate.SQL                        : select person0_.id as id1_1_0_, person0_.gid as gid2_1_0_, person0_.name as name3_1_0_ from persons person0_ where person0_.id=?
 
-2021-02-09 23:58:53.445  INFO 15432 --- [    Test worker] de.lathspell.test.service.PersonService  : # reloading all persons
+2021-02-09 23:58:53.445  INFO 15432 --- [    Test worker] de.lathspell.test.jpa.a1.PersonService  : # reloading all persons
 2021-02-09 23:58:53.445 DEBUG 15432 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(760474367<open>)] for JPA transaction
 2021-02-09 23:58:53.445 DEBUG 15432 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
 2021-02-09 23:58:53.552 DEBUG 15432 --- [    Test worker] org.hibernate.SQL                        : insert into persons (gid, name, id) values (?, ?, ?)
 2021-02-09 23:58:53.568 DEBUG 15432 --- [    Test worker] org.hibernate.SQL                        : select person0_.id as id1_1_, person0_.gid as gid2_1_, person0_.name as name3_1_ from persons person0_
 
-2021-02-09 23:58:53.568  INFO 15432 --- [    Test worker] de.lathspell.test.service.PersonService  : # deleting all groups
+2021-02-09 23:58:53.568  INFO 15432 --- [    Test worker] de.lathspell.test.jpa.a1.PersonService  : # deleting all groups
 2021-02-09 23:58:53.568 DEBUG 15432 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(760474367<open>)] for JPA transaction
 2021-02-09 23:58:53.568 DEBUG 15432 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
 2021-02-09 23:58:53.568 DEBUG 15432 --- [    Test worker] org.hibernate.SQL                        : select group0_.id as id1_0_, group0_.name as name2_0_ from groups group0_
 
-2021-02-09 23:58:53.568  INFO 15432 --- [    Test worker] de.lathspell.test.service.PersonService  : # rewriting all groups
+2021-02-09 23:58:53.568  INFO 15432 --- [    Test worker] de.lathspell.test.jpa.a1.PersonService  : # rewriting all groups
 2021-02-09 23:58:53.568 DEBUG 15432 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(760474367<open>)] for JPA transaction
 2021-02-09 23:58:53.568 DEBUG 15432 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
 2021-02-09 23:58:53.568 DEBUG 15432 --- [    Test worker] org.hibernate.SQL                        : select group0_.id as id1_0_0_, group0_.name as name2_0_0_ from groups group0_ where group0_.id=?

@@ -15,7 +15,7 @@ group = "de.lathspell.test"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -24,6 +24,9 @@ dependencies {
     // JPA
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     testRuntimeOnly("com.h2database:h2")
+    testRuntimeOnly("org.postgresql:postgresql:42.3.0")
+    implementation("org.flywaydb:flyway-core:8.0.2")
+    testImplementation("org.flywaydb.flyway-test-extensions:flyway-spring-test:7.0.0")
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
