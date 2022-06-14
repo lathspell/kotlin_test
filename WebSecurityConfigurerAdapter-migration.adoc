@@ -1,0 +1,63 @@
+alt:
+
+    class OAuth2SecurityConfig : WebSecurityConfigurerAdapter() {
+
+        override fun configure(http: HttpSecurity) {
+            http
+                .requestMatcher {
+                    !(it.getHeader(AUTHORIZATION) ?: "").startsWith("Basic")
+                }
+                .oauth2ResourceServer().jwt().jwtAuthenticationConverter(CustomBearerJwtAuthenticationConverter()).and()
+                .and()
+                .oauth2Login()
+
+            http.csrf().disable()
+            http.authorizeRequests()
+                .mvcMatchers("/readiness", "/liveness", "/actuator/health/**").permitAll()
+        }
+
+neu:
+
+    class OAuth2SecurityConfig {
+
+    @Bean
+    fun customOauth2FilterChain(http: HttpSecurity): SecurityFilterChain {
+        http {
+            securityMatcher(
+                RequestMatcher { !(it.getHeader(AUTHORIZATION) ?: "").startsWith("Basic") }
+            )
+            oauth2ResourceServer {
+                jwt { jwtAuthenticationConverter = CustomBearerJwtAuthenticationConverter() }
+            }
+            oauth2Login {}
+
+            csrf { disable() }
+
+            authorizeRequests {
+                authorize("/readiness", permitAll)
+                authorize("/liveness", permitAll)
+                authorize("/actuator/health/**", permitAll)
+            }
+        }
+        return http.build()
+
+Bei der Verwendung von Basic Auth, z.B. für Testuser in Integrationstests:
+
+alt:
+
+    class BasicAuthSecurityConfig : WebSecurityConfigurerAdapter() {
+
+        override fun configure(amb: AuthenticationManagerBuilder) {
+            val authCfg = amb.inMemoryAuthentication()
+            testUsers.forEach {
+                authCfg.withUser(it.userDetails())
+            }
+        }
+ 
+
+neu:
+
+    @Bean
+    fun customTestUserDetailManager(): InMemoryUserDetailsManager {
+        return InMemoryUserDetailsManager(testUsers.map { it.userDetails() })
+    }
