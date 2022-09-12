@@ -3,9 +3,9 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.30"
+    kotlin("jvm") version "1.7.10"
 
-    id("com.github.ben-manes.versions") version "0.36.0"        // https://github.com/ben-manes/gradle-versions-plugin for ":dependencyUpdates"
+    id("com.github.ben-manes.versions") version "0.42.0"        // https://github.com/ben-manes/gradle-versions-plugin for ":dependencyUpdates"
 }
 
 group = "de.lathspell"
