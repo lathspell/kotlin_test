@@ -1,0 +1,6 @@
+= SpringBoot with RFC 7807
+
+== JDK 17
+
+Spring Framework 3 need JDK 17!
+

@@ -1,0 +1,10 @@
+logging:
+  level:
+    root: INFO
+    de.lathspell.test: DEBUG
+    org.springframework: INFO
+    org.springframework.web: INFO
+    # org.springframework.web.HttpLogging: DEBUG
+    # reactor.netty.http.client.HttpClientConnect: DEBUG
+    # reactor.netty.http.client.HttpClientOperations: DEBUG
+    # reactor.netty.http.server.HttpServerOperations: DEBUG
