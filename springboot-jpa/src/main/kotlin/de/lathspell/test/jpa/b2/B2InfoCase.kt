@@ -3,7 +3,7 @@ package de.lathspell.test.jpa.b2
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
 import java.util.*
-import javax.persistence.*
+import jakarta.persistence.*
 
 @Entity
 @Table(name = "b2_info_cases")

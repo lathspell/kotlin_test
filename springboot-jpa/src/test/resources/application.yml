@@ -8,7 +8,7 @@ spring:
   datasource:
     # H2 with SQL Statement Logging
     # url: "jdbc:h2:mem:test;TRACE_LEVEL_SYSTEM_OUT=2"
-    # PostgreSQL via docker-compose
+    # Postgres via docker-compose
     url: "jdbc:postgresql://localhost/test"
     username: "test"
     password: "test"

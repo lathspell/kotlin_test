@@ -1,8 +1,8 @@
 package de.lathspell.test.jpa.b2
 
 import java.util.*
-import javax.persistence.*
-import javax.persistence.FetchType.EAGER
+import jakarta.persistence.*
+import jakarta.persistence.FetchType.EAGER
 
 @Entity
 @Table(name = "b2_info_requests")

@@ -1,10 +1,10 @@
 package de.lathspell.test.jpa.a1
 
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
-import javax.persistence.UniqueConstraint
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+import jakarta.persistence.Table
+import jakarta.persistence.UniqueConstraint
 
 @Entity
 @Table(name = "persons", uniqueConstraints = [UniqueConstraint(name = "uc_persons_name", columnNames = ["name"])])
