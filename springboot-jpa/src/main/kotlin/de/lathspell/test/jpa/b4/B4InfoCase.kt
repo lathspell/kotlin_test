@@ -13,10 +13,11 @@ class B4InfoCase(
 
     var customerId: String,
 
-    /** Caveat: The cached collection will not be automatically synchronized with the database changes! */
     @OneToMany(fetch = EAGER, mappedBy = "case", orphanRemoval = true, cascade = [CascadeType.ALL])
     var requests: MutableList<B4InfoRequest> = ArrayList()
 ) {
+
+    /** This method adds children and sets this object as their parent reference. */
     fun withRequests(vararg reqs: B4InfoRequest): B4InfoCase {
         reqs.forEach { it.case = this }
         requests = reqs.toMutableList()
