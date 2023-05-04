@@ -17,8 +17,8 @@ data class B4InfoRequest(
 
     @ManyToOne(fetch = EAGER)
     @JoinColumn(name = "case_id", referencedColumnName = "id", nullable = false)
-    @Fetch(FetchMode.JOIN)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Fetch(FetchMode.JOIN) // optional: to have nicer SQL queries, implies EAGER loading
+    @OnDelete(action = OnDeleteAction.CASCADE) // optional: could not yet find any effect
     val case: B4InfoCase? = null,
 
     val comment: String

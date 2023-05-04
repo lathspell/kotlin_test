@@ -12,6 +12,7 @@ data class B4InfoCase(
 
     val customerId: String,
 
-    @OneToMany(fetch = EAGER, orphanRemoval = true /* ??? */, mappedBy = "case")
+    /** Caveat: The cached collection will not be automatically synchronized with the database changes! */
+    @OneToMany(fetch = EAGER, orphanRemoval = false /* could not yet find any effect */, mappedBy = "case")
     val requests: List<B4InfoRequest> = emptyList()
 )

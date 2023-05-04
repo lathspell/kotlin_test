@@ -22,6 +22,24 @@ class B4CascadeTest(
     }
 
     @Test
+    fun `do collection entries automatically appear in the parent or is reload necessary`() {
+        // create parent
+        val case1 = B4InfoCase(customerId = "c123")
+        infoCaseRepo.save(case1)
+
+        // create child
+        val req1 = B4InfoRequest(case = case1, comment = "foo")
+        infoRequestRepo.save(req1)
+
+        // check if child appears automatically
+        assertThat(case1.requests).hasSize(0) // no
+
+        // refresh
+        val case1b = infoCaseRepo.findById(case1.id).get()
+        assertThat(case1b.requests).hasSize(1) // now it's there
+    }
+
+    @Test
     fun `deleting parent cascades to children`() {
         // create objects
         val case1 = B4InfoCase(customerId = "c123")
@@ -62,8 +80,12 @@ class B4CascadeTest(
         // delete children
         infoRequestRepo.delete(req1)
 
+        // does parent know about the now missing child?
+        assertThat(case1b.requests.size).isEqualTo(2) // No! CAVEAT: Attempting to access them gives StackOverflow!
+
         // child should be gone none
         assertThat(infoCaseRepo.findAll()).hasSize(1)
         assertThat(infoRequestRepo.findAll()).hasSize(1)
     }
+
 }
