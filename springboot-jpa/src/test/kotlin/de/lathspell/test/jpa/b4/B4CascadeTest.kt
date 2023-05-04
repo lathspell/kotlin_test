@@ -75,17 +75,29 @@ class B4CascadeTest(
 
         // refresh
         val case1b = infoCaseRepo.findById(case1.id).get()
-        assertThat(case1b.requests).hasSize(2)
+        assertThat(case1b.requests.size).isEqualTo(2)
 
-        // delete children
-        infoRequestRepo.delete(req1)
-
-        // does parent know about the now missing child?
-        assertThat(case1b.requests.size).isEqualTo(2) // No! CAVEAT: Attempting to access them gives StackOverflow!
+        // delete children via parent
+        case1b.requests.removeAll { it.comment == "foo" }
+        infoCaseRepo.save(case1b)
 
         // child should be gone none
         assertThat(infoCaseRepo.findAll()).hasSize(1)
         assertThat(infoRequestRepo.findAll()).hasSize(1)
     }
 
+    @Test
+    fun `save with pre made children does work`() {
+        // create objects
+        val req1 = B4InfoRequest(case = null, comment = "foo")
+        val req2 = B4InfoRequest(case = null, comment = "bar")
+        val case1 = B4InfoCase(customerId = "c123").withRequests(req1, req2)
+
+        log.info("case1.requests.size: {}", case1.requests.size)
+        infoCaseRepo.save(case1)
+
+        // refresh
+        val case1b = infoCaseRepo.findById(case1.id).get()
+        assertThat(case1b.requests).hasSize(2)
+    }
 }
