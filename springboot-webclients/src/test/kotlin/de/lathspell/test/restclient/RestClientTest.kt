@@ -1,4 +1,4 @@
-package de.lathspell.test.fuel
+package de.lathspell.test.restclient
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
@@ -14,7 +14,6 @@ import com.github.kittinunf.fuel.coroutines.awaitStringResponseResult
 import com.github.kittinunf.fuel.jackson.responseObject
 import com.github.kittinunf.result.getOrElse
 import de.lathspell.test.rest.model.Greeting
-import de.lathspell.test.restclient.RestClientTest
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -28,7 +27,7 @@ import org.springframework.boot.test.web.server.LocalServerPort
  * Fuel HTTP Client.
  */
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-class FuelTest(@LocalServerPort port: Int) {
+class RestClientTest(@LocalServerPort port: Int) {
 
     private val specialOm = ObjectMapper().registerKotlinModule().registerModule(JavaTimeModule())
 

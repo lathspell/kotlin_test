@@ -4,8 +4,7 @@ import de.lathspell.test.rest.model.Greeting
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.web.server.LocalServerPort
-import org.springframework.http.MediaType
+import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.http.MediaType.TEXT_PLAIN
 import org.springframework.web.reactive.function.client.WebClient
@@ -27,7 +26,7 @@ class WebFluxBlockingTest(@LocalServerPort port: Int) {
             .toEntity<String>()
             .block()!!
 
-        Assertions.assertThat(response.statusCodeValue).isEqualTo(200)
+        Assertions.assertThat(response.statusCode.value()).isEqualTo(200)
         Assertions.assertThat(response.body).isEqualTo("Hello World")
     }
 
