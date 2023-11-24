@@ -13,9 +13,12 @@ class HelloWorldController {
     private val log = LoggerFactory.getLogger(HelloWorldController::class.java)
 
     @GetMapping("/hello-world/txt", produces = [TEXT_PLAIN_VALUE])
-    fun helloWorldAsText(): String {
+    fun helloWorldAsText(@RequestParam(required = false) lang: String? = null): String {
         log.info("Handling /hello-world/txt")
-        return "Hello World"
+        return when (lang) {
+            "de" -> "Hallo Welt"
+            else -> "Hello World"
+        }
     }
 
     @GetMapping("/hello-world/json")
