@@ -1,9 +1,7 @@
 package de.lathspell.test.ktor
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import de.lathspell.test.rest.model.Greeting
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -16,7 +14,6 @@ import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
 import io.ktor.http.ContentType.*
 import io.ktor.serialization.jackson.*
-import io.ktor.util.reflect.*
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
@@ -26,8 +23,6 @@ import org.springframework.boot.test.web.server.LocalServerPort
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 class KtorTest(@LocalServerPort port: Int) {
-
-    private val specialOm = ObjectMapper().registerKotlinModule().registerModule(JavaTimeModule())
 
     private val baseUri = "http://localhost:$port/hello-world"
     private val client = HttpClient(Apache) {

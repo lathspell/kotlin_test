@@ -122,7 +122,7 @@ class FuelTest(@LocalServerPort port: Int) {
 
     @Test
     fun `get async with coroutines and fold`() {
-        var greeting: String = ""
+        var greeting = ""
         runBlocking {
             val (request, response, result) = Fuel.get("$baseUri/txt").awaitStringResponseResult()
 
@@ -137,7 +137,7 @@ class FuelTest(@LocalServerPort port: Int) {
     private fun myLoggingRequestInterceptor() =
         { next: (Request) -> Request ->
             { req: Request ->
-                log.debug("Request: $req")
+                log.debug("Request: {}", req)
                 next(req)
             }
         }
@@ -145,7 +145,7 @@ class FuelTest(@LocalServerPort port: Int) {
     private fun myLoggingResponseInterceptor() =
         { next: (Request, Response) -> Response ->
             { req: Request, resp: Response ->
-                log.debug("Response: $resp")
+                log.debug("Response: {}", resp)
                 log.debug("Body: " + String(resp.body().toByteArray()))
                 next(req, resp)
             }

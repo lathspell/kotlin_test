@@ -35,7 +35,7 @@ class WebFluxAsyncCoroutinesTest(@LocalServerPort port: Int) {
         }
     }
 
-    /** Each WebClient call just blocks until it has received an response. But Kotlin calls each of those requests in a different Thread and thus
+    /** Each WebClient call just blocks until it has received a response. But Kotlin calls each of those requests in a different Thread, and thus
      * they are executed in parallel. */
     @Test
     fun `get text with async 10x`() {
