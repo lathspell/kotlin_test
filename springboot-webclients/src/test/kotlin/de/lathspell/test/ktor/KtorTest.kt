@@ -6,14 +6,17 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import de.lathspell.test.rest.model.Greeting
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.engine.apache.*
-import io.ktor.client.features.*
-import io.ktor.client.features.auth.*
-import io.ktor.client.features.auth.providers.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.logging.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.auth.*
+import io.ktor.client.plugins.auth.providers.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
 import io.ktor.http.ContentType.*
+import io.ktor.serialization.jackson.*
+import io.ktor.util.reflect.*
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
@@ -43,8 +46,9 @@ class KtorTest(@LocalServerPort port: Int) {
                 credentials { BasicAuthCredentials("username", "password") }
             }
         }
-        install(JsonFeature) {
-            serializer = JacksonSerializer(jackson = specialOm) {
+        install(ContentNegotiation) {
+            jackson {
+                registerModule(JavaTimeModule())
                 enable(SerializationFeature.INDENT_OUTPUT)
             }
         }
@@ -64,9 +68,7 @@ class KtorTest(@LocalServerPort port: Int) {
     @Test
     fun `get text with response entity`() {
         runBlocking {
-            val response = client.get<String>("$baseUri/txt") {
-                accept(Text.Plain)
-            }
+            val response = client.get("$baseUri/txt") { accept(Text.Plain) }.body<String>()
             Assertions.assertThat(response).isEqualTo("Hello World")
         }
     }
@@ -74,7 +76,7 @@ class KtorTest(@LocalServerPort port: Int) {
     @Test
     fun `get json object`() {
         runBlocking {
-            val response = client.get<Greeting>("$baseUri/json")
+            val response = client.get("$baseUri/json").body<Greeting>()
             Assertions.assertThat(response).isEqualTo(Greeting(first = "Hello", second = "World"))
         }
     }
