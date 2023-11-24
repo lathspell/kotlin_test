@@ -64,6 +64,6 @@ class Http4kTest(@LocalServerPort port: Int) {
         val response = client(request)
 
         assertThat(response.status).isEqualTo(OK)
-        assertThat(response.bodyString()).isEqualTo("Hello World")
+        assertThat(response.bodyString()).isEqualTo("Hallo Welt")
     }
 }

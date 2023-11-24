@@ -54,7 +54,7 @@ class FuelTest(@LocalServerPort port: Int) {
 
         check(response.isSuccessful) { "Request " + request.method + " " + request.url + ": " + response.statusCode + ": " + response.data.toString() }
 
-        assertThat(result.get()).isEqualTo("Hello World")
+        assertThat(result.get()).isEqualTo("Hallo Welt")
     }
 
     @Test

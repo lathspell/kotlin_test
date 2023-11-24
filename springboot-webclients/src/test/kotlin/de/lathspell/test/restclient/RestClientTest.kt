@@ -42,8 +42,6 @@ class RestClientTest(@LocalServerPort port: Int) {
         assertThat(result).isEqualTo("Hello World")
     }
 
-    private val baseUri = ""
-
     @Test
     fun `get with query parameters`() {
         val result = restClient.get().uri("/txt?lang=de").header("Accept", "text/plain").retrieve().body<String>()
