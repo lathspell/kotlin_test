@@ -34,6 +34,7 @@ class RestClientTest(@LocalServerPort port: Int) {
     private val restClient = RestClient.builder()
         .baseUrl(baseUrl)
         .defaultHeaders { it.setBearerAuth("ey...") }
+        .requestInterceptor(myLoggingInterceptor())
         .build()
 
     @Test
@@ -85,6 +86,13 @@ class RestClientTest(@LocalServerPort port: Int) {
         val result = client.get().uri("/json").retrieve().body<Greeting>()
 
         assertThat(result).isEqualTo(Greeting(first = "Hello", second = "World"))
+    }
+
+    @Test
+    fun `PATCH actually uses HTTP method PATCH and not PUT`() {
+        val greeting = Greeting(first = "Hello", second = "World")
+        val result = restClient.patch().uri("/patch").body(greeting).retrieve().body<Greeting>()
+        assertThat(result).isEqualTo(greeting)
     }
 
     private fun myLoggingInterceptor() = ClientHttpRequestInterceptor { request, body, execution ->
