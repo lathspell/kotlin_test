@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE
-import org.springframework.data.jdbc.core.JdbcAggregateTemplate
 
 @SpringBootTest(webEnvironment = NONE)
 class TxTest(
