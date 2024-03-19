@@ -1,3 +1,32 @@
 = SpringBoot JPA demo
 
-Little demo of transactions using Spring's `@Transactional` that span several SQL statements.
+Experiments with JPA.
+
+== JPA rules
+
+=== Use `fetch=LAZY`
+
+> A very unfortunate misfeature of JPA is that @ManyToOne associations are fetched eagerly by default.
+> This is almost never what we want. Almost all associations should be lazy.
+-- https://docs.jboss.org/hibernate/orm/6.4/introduction/html_single/Hibernate_Introduction.html#many-to-one
+
+== Delete from the "owning" side
+
+In a 1:n relationship, the single-valued side is called the "owning" side.
+
+> Changes made to the unowned side of an association are never synchronized to the database.
+> If we desire to change an association in the database, we must change it from the owning side.
+
+> In fact, it’s often necessary to change both sides of a bidirectional association.
+> For example, if the collection Publisher.books was stored in the second-level cache, we must also modify the collection,
+> to ensure that the second-level cache remains synchronized with the database.
+-- https://docs.jboss.org/hibernate/orm/6.4/introduction/html_single/Hibernate_Introduction.html#many-to-one
+
+E.g. in an Author-Books relationship, delete Books using `author1.books.remove(book1); authorRepo.save(author1)`.
+
+== Use @ManyToOne or both but not @OneToMany alone!
+
+> In principle Hibernate does allow you to have a unidirectional one-to-many, that is, a @OneToMany with no matching @ManyToOne on the other side.
+> In practice, this mapping is unnatural, and just doesn’t work very well. Avoid it.
+-- https://docs.jboss.org/hibernate/orm/6.4/introduction/html_single/Hibernate_Introduction.html#many-to-one
+

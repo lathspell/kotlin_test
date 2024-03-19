@@ -11,4 +11,4 @@ CREATE TABLE d1_info
     info      text NOT NULL
 );
 
-ALTER TABLE d1_info ADD FOREIGN KEY (task_uuid) REFERENCES d1_tasks (uuid);
+ALTER TABLE d1_info ADD FOREIGN KEY (task_uuid) REFERENCES d1_tasks (uuid) ON DELETE CASCADE;
