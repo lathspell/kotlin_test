@@ -10,20 +10,21 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE
 @SpringBootTest(webEnvironment = NONE)
 class B2CascadeTest(
     @Autowired private val infoCaseRepo: B2InfoCaseRepo,
-    @Autowired private val infoRequestRepo: B2InfoRequestRepo,
-    @Autowired private val b2Service: B2Service
+    @Autowired private val infoRequestRepo: B2InfoRequestRepo
 ) {
     private val log = LoggerFactory.getLogger(B2CascadeTest::class.java)
 
     @Test
     fun `strange behaviour`() {
+        // prepare - create objects
+        val case1 = B2InfoCase(customerId = "c123")
+        infoCaseRepo.save(case1)
+        val req1 = B2InfoRequest(case = case1, comment = "foo")
+        infoRequestRepo.save(req1) // FIXME: don't do this, attach req1 to case1 and then save case1!
+        val req2 = B2InfoRequest(case = case1, comment = "bar")
+        infoRequestRepo.save(req2)
 
-        b2Service.prepare()
-
-        b2Service.delete()
-
-        // child should be gone none - but isn't due to the JPA cache which does not know about the SQL "on cascade"
-        assertThat(infoCaseRepo.findAll()).isEmpty()
-        assertThat(infoRequestRepo.findAll()).isEmpty()
+        // children are only available after refreshing
+        assertThat(case1.requests.size).isEqualTo(0)
     }
 }

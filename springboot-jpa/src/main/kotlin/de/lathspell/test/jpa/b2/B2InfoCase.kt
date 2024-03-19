@@ -13,9 +13,9 @@ data class B2InfoCase(
 
     val customerId: String,
 ) {
-    @OneToMany(cascade = [CascadeType.REMOVE], orphanRemoval = false /* default */)
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "case", cascade = [CascadeType.ALL], orphanRemoval = true /* default is false */)
     @OnDelete(action = OnDeleteAction.CASCADE) // prevents individual DELETE statements for all B2InfoRequests
-    @JoinColumn(name = "caseId")
     val requests: List<B2InfoRequest> = emptyList()
 }
 

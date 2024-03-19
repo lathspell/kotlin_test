@@ -1,12 +1,12 @@
 CREATE TABLE b2_info_cases
 (
-    id              varchar(255) not null primary key,
-    customer_id     varchar(255) not null
+    id          text NOT NULL PRIMARY KEY,
+    customer_id text NOT NULL
 );
 
 CREATE TABLE b2_info_requests
 (
-    id          varchar(255) not null primary key,
-    case_id     varchar(255) not null references b2_info_cases (id) on delete cascade,
-    comment     varchar(255) not null
+    id      text NOT NULL PRIMARY KEY,
+    case_id text NOT NULL REFERENCES b2_info_cases (id) ON DELETE CASCADE,
+    comment text NOT NULL
 );
