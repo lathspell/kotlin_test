@@ -15,7 +15,7 @@ class EnumTest {
 
         @JsonValue // For enums, @JsonValue is used for both, serializing and deserializing!
         fun toJson(): String {
-            return this.name.toLowerCase()
+            return this.name.lowercase()
         }
     }
 

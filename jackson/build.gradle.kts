@@ -1,18 +1,17 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.30"
+    kotlin("jvm") version "2.0.20"
 
-    id("com.github.ben-manes.versions") version "0.33.0"        // https://github.com/ben-manes/gradle-versions-plugin for ":dependencyUpdates"
+    id("com.github.ben-manes.versions") version "0.51.0"        // https://github.com/ben-manes/gradle-versions-plugin for ":dependencyUpdates"
 }
 
 group = "de.lathspell"
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -20,22 +19,22 @@ dependencies {
     implementation(kotlin("reflect"))
 
     // JSON
-    val jacksonVersion = "2.9.6"
+    val jacksonVersion = "2.18.0"
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
 
     // JSON Patch
-    implementation("com.flipkart.zjsonpatch:zjsonpatch:0.4.11")
+    implementation("com.flipkart.zjsonpatch:zjsonpatch:0.4.16")
 
     // Test
-    testImplementation(platform("org.junit:junit-bom:5.7.0"))
+    testImplementation(platform("org.junit:junit-bom:5.10.3"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
+kotlin {
+    jvmToolchain(17)
+    compilerOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "11"
     }
 }
 

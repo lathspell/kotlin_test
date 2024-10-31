@@ -1,0 +1,31 @@
+---
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
+---
+spring:
+  datasource:
+    # H2 with SQL Statement Logging
+    # url: "jdbc:h2:mem:test;TRACE_LEVEL_SYSTEM_OUT=2"
+    # Postgres via docker-compose
+    url: "jdbc:postgresql://localhost/test"
+    username: "test"
+    password: "test"
+    driver-class-name: "org.postgresql.Driver"
+---
+spring:
+  jpa:
+    show-sql: false # lieber "org.hibernate.SQL: DEBUG"
+    properties:
+      hibernate:
+        format_sql: false # multiline bringt bei kurzen Statements nichts
+---
+logging:
+  level:
+    root: INFO
+    de.lathspell: DEBUG
+    org.springframework: INFO
+    org.springframework.orm.jpa.JpaTransactionManager: DEBUG  # "Creating new transaction", "Committing"
+    org.hibernate.SQL: DEBUG # DEBUG logs SQL statements
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE # TRACE logs prepared statement parameters

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
@@ -42,7 +43,7 @@ class KotlinJacksonAdvTest {
 
     @Test
     fun testWithKotlinModule() {
-        val omPlain = ObjectMapper().registerModule(JavaTimeModule()).registerModule(KotlinModule())
+        val omPlain = ObjectMapper().registerModule(JavaTimeModule()).registerKotlinModule()
         val json = omPlain.writeValueAsString(p)
         val p1: Person = omPlain.readValue(json)
         assertEquals(p, p1)
