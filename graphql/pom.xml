@@ -70,7 +70,7 @@
             <!-- SpringBoot sees and uses this so that we get colorful output. -->
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
+            <version>1.2.13</version>
         </dependency>
 
         <dependency>
