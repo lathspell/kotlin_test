@@ -1,14 +1,15 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
-import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
-    val kotlinVersion = "1.9.21"
+    val kotlinVersion = "2.1.21"
     kotlin("jvm") version kotlinVersion
-    kotlin("plugin.jpa") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
-    id("org.springframework.boot") version "3.2.0"
-    id("io.spring.dependency-management") version "1.1.4"
+    kotlin("plugin.jpa") version kotlinVersion
+
+    id("io.spring.dependency-management") version "1.1.7"
+    id("org.springframework.boot") version "3.5.0"
+
     id("com.github.ben-manes.versions") version "0.50.0"    // https://github.com/ben-manes/gradle-versions-plugin for ":dependencyUpdates"
 }
 
@@ -30,18 +31,18 @@ dependencies {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions {
+    compilerOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "17"
+        jvmTarget = JVM_21
     }
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
-    testLogging {
-        events(SKIPPED, STARTED, PASSED, FAILED)
-        exceptionFormat = TestExceptionFormat.FULL
-        showStandardStreams = true // print all stdout/stderr output to console
-        minGranularity = 0 // show class and method names
-    }
+    // testLogging {
+    // events (SKIPPED, STARTED, PASSED, FAILED)
+    // exceptionFormat = TestExceptionFormat.FULL
+    // showStandardStreams = true // print all stdout/stderr output to console
+    // minGranularity = 0 // show class and method names
+    // }
 }
