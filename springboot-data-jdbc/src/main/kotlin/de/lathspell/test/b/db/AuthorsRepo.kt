@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface AuthorsRepo : CrudRepository<AuthorEntity, UUID> {
+interface AuthorsRepo : CrudRepository<AuthorEntity, Long> {
 }
