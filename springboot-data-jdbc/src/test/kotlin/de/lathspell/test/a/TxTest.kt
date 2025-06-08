@@ -1,9 +1,9 @@
-package de.lathspell.test
+package de.lathspell.test.a
 
-import de.lathspell.test.jpa.GroupRepo
-import de.lathspell.test.jpa.PersonRepo
-import de.lathspell.test.model.Person
-import de.lathspell.test.service.PersonService
+import de.lathspell.test.a.db.GroupRepo
+import de.lathspell.test.a.db.PersonRepo
+import de.lathspell.test.a.model.Person
+import de.lathspell.test.a.service.PersonService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

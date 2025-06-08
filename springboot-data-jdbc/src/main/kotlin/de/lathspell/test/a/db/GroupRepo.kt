@@ -1,6 +1,6 @@
-package de.lathspell.test.jpa
+package de.lathspell.test.a.db
 
-import de.lathspell.test.model.Group
+import de.lathspell.test.a.model.Group
 import org.springframework.data.repository.CrudRepository
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository

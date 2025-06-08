@@ -1,4 +1,4 @@
-package de.lathspell.test.model
+package de.lathspell.test.a.model
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table

@@ -1,9 +1,9 @@
-package de.lathspell.test.service
+package de.lathspell.test.a.service
 
-import de.lathspell.test.jpa.GroupRepo
-import de.lathspell.test.jpa.PersonRepo
-import de.lathspell.test.model.Group
-import de.lathspell.test.model.Person
+import de.lathspell.test.a.db.GroupRepo
+import de.lathspell.test.a.db.PersonRepo
+import de.lathspell.test.a.model.Group
+import de.lathspell.test.a.model.Person
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

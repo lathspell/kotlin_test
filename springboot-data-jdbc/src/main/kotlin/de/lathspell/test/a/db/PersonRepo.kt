@@ -1,7 +1,6 @@
-package de.lathspell.test.jpa
+package de.lathspell.test.a.db
 
-import de.lathspell.test.model.Person
-import org.springframework.data.jdbc.repository.query.Query
+import de.lathspell.test.a.model.Person
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 import java.util.*
